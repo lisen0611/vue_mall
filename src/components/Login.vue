@@ -60,6 +60,8 @@
                                     message: '登录成功！',
                                     type: 'success'
                                 });
+                                sessionStorage.setItem('token', res.data.data.token)
+                                this.$router.replace('/home')
                             } else if (res.data.meta.status == 400) {
                                 this.$message.error('登录失败');
                             } else {
