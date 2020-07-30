@@ -17,7 +17,8 @@
                             active-text-color="#409eff"
                             :collapse="collapse"
                             :collapse-transition="false"
-                            :router="true">
+                            :router="true"
+                            :default-active="$route.path">
                         <el-button type="primary" @click="changeCollapse">{{msg}}</el-button>
                         <el-submenu v-for="item in menuList" v-bind:key="item.id" :index="item.id+''">
                             <template slot="title">
@@ -74,10 +75,12 @@
             },
             getMenuList() {
                 this.$http.get('menus').then(res => {
-                    console.log(res)
+
                     if (res.data.meta.status == 200) {
                         this.menuList = res.data.data
                     }
+                    else
+                        this.$message.error('获取数据失败')
                 })
             },
             changeCollapse() {
