@@ -57,13 +57,13 @@
                         this.$http.post('login', this.loginForm).then(res => {
                             if (res.data.meta.status == 200) {
                                 this.$message({
-                                    message: '登录成功！',
+                                    message: res.data.meta.msg,
                                     type: 'success'
                                 });
                                 sessionStorage.setItem('token', res.data.data.token)
                                 this.$router.replace('/home')
                             } else if (res.data.meta.status == 400) {
-                                this.$message.error('登录失败');
+                                this.$message.error(res.data.meta.msg);
                             } else {
                                 this.$message.error('登录失败');
                             }
